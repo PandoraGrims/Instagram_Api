@@ -32,11 +32,16 @@
 
                 {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url "accounts:logout" %}">Выход</a>
+                        <form method="post" action="{% url 'accounts:logout' %}">
+                            {% csrf_token %}
+                            <button class="btn-link px-3"
+                                    style="text-decoration: none" type="submit">Выход
+                            </button>
+                        </form>
                     </li>
                     <li class="nav-item">
-                        <p>Здравствуйте <a
-                                href="{% url "accounts:profile" request.user.pk %}">{{ request.user.username }} </a></p>
+                        <a
+                                href="{% url "accounts:profile" request.user.pk %}">{{ request.user.username }} </a>
                     </li>
                 {% else %}
                     <li class="nav-item">

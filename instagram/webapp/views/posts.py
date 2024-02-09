@@ -20,7 +20,6 @@ class PostsListView(ListView):
     def get_queryset(self):
         posts = super().get_queryset()
         if self.request.user.is_authenticated:
-            # posts = posts.filter(author__followers__contains=self.request.user.pk)
             posts = super().get_queryset().filter(author__in=self.request.user.following.all())
         return posts
 
